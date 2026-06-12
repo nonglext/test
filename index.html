@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Robuy — Premium Dark Beta</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="bg-glow glow-purple"></div>
+    <div class="bg-glow glow-blue"></div>
+
+    <div class="modal-overlay hidden" id="authModal">
+        <div class="modal-card">
+            <button class="modal-close" id="closeModalBtn">×</button>
+            
+            <div class="auth-tabs" id="authTabsZone">
+                <button class="auth-tab-btn active" id="tabLogin">Вход</button>
+                <button class="auth-tab-btn" id="tabRegister">Регистрация</button>
+            </div>
+
+            <div id="standardAuthBlock">
+                <div class="modal-header-text">
+                    <h2 id="authTitle">Вход в аккаунт</h2>
+                    <p class="auth-subtitle" id="authSubtitle">Войдите для доступа к панели Robuy</p>
+                </div>
+                
+                <form id="credForm">
+                    <div class="input-group">
+                        <label id="labelUserField">Имя пользователя</label>
+                        <input type="text" id="authUsername" placeholder="Например: RobloxPlayer" required>
+                    </div>
+                    <div class="input-group hidden" id="emailRegWrapper">
+                        <label>Электронная почта</label>
+                        <input type="email" id="authEmail" placeholder="example@mail.com">
+                    </div>
+                    <div class="input-group">
+                        <label>Пароль</label>
+                        <input type="password" id="authPassword" placeholder="••••••••" required>
+                    </div>
+                    
+                    <button type="submit" class="btn-primary-action" id="btnSubmitCreds">Продолжить</button>
+                </form>
+
+                <div class="auth-divider"><span>или</span></div>
+                
+                <button class="btn-secondary-action" id="switchToGmailBtn">
+                    <span class="g-icon">G</span> Войти через Gmail
+                </button>
+            </div>
+
+            <div id="gmailAuthBlock" class="hidden">
+                <div class="g-logo-big">
+                    <svg viewBox="0 0 24 24" width="40" height="40">
+                        <path fill="#EA4335" d="M12 5.04c1.64 0 3.12.56 4.28 1.67l3.2-3.2C17.52 1.58 14.97 1 12 1 7.35 1 3.4 3.65 1.5 7.5l3.86 3c.9-2.7 3.4-4.46 6.64-4.46z"/>
+                        <path fill="#4285F4" d="M23.5 12.25c0-.82-.07-1.6-.2-2.25H12v4.26h6.46c-.27 1.45-1.1 2.68-2.33 3.5l3.6 2.8c2.1-1.94 3.3-4.8 3.3-8.3z"/>
+                        <path fill="#FBBC05" d="M5.36 14.15c-.23-.68-.36-1.42-.36-2.15s.13-1.47.36-2.15L1.5 6.85C.54 8.77 0 10.32 0 12s.54 3.23 1.5 5.15l3.86-3z"/>
+                        <path fill="#34A853" d="M12 23c3.24 0 5.97-1.08 7.96-2.9l-3.6-2.8c-1.1.74-2.5 1.18-4.36 1.18-3.24 0-5.74-1.76-6.64-4.46L1.5 17c1.9 3.85 5.85 6.5 10.5 6.5z"/>
+                    </svg>
+                </div>
+                <div class="modal-header-text">
+                    <h2>Вход в аккаунт Robuy</h2>
+                    <p class="auth-subtitle">Используйте вашу Google почту для активации статуса бета-тестирования</p>
+                </div>
+                
+                <div class="input-group">
+                    <label>Введите ваш Gmail</label>
+                    <input type="email" id="gmailInputField" placeholder="example@gmail.com">
+                </div>
+                
+                <button class="btn-primary-action white-btn" id="btnGoogleSubmit">Продолжить через Google</button>
+                <p class="terms-text">Нажимая кнопку, вы входите в закрытый бета-тест.</p>
+
+                <button class="btn-text-only" id="btnBackToClassic">← Назад к стандартному входу</button>
+            </div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="logo-group" id="logoToMain">
+            <div class="logo-hex">⬡</div>
+            <span class="logo-title">Robuy</span>
+            <span class="beta-tag">BETA</span>
+        </div>
+
+        <nav class="nav-menu">
+            <a href="#" class="nav-link active" id="navBuyBtn">⏣ Купить робуксы</a>
+            <a href="#" class="nav-link">👤 Бесплатно</a>
+            <a href="#" class="nav-link">🎫 Розыгрыш</a>
+            <a href="#" class="nav-link">🕒 Мои покупки</a>
+            <a href="#" class="nav-link">🎁 Промокод</a>
+            <a href="#" class="nav-link hidden admin-link" id="navAdminBtn">🛠 Админ-панель</a>
+        </nav>
+
+        <div class="header-actions">
+            <button class="btn-header-login" id="headerAuthBtn">Войти через Gmail</button>
+            
+            <div class="user-profile hidden" id="headerProfileWidget">
+                <div class="avatar-circle" id="avatarSlot">🤖</div>
+                <div class="profile-text">
+                    <span class="p-email" id="sessionUsername">user@mail.com</span>
+                    <span class="p-role" id="sessionRoleBadge">BETA TESTER</span>
+                </div>
+                <button class="btn-logout" id="btnExitSession">🚪</button>
+            </div>
+        </div>
+    </header>
+
+    <main class="main-container">
+        
+        <section class="premium-card" id="viewStepSlider">
+            <div class="badges-row">
+                <span class="badge blue-badge">🔥 ЛУЧШИЙ КУРС РОБУКСОВ</span>
+                <span class="badge purple-badge">⚡ МОМЕНТАЛЬНЫЙ ТРАНСФЕР</span>
+            </div>
+
+            <div class="calc-display">
+                <span id="rublesValue" class="val-rub">3267.97 ₽</span>
+                <span class="val-eq">=</span>
+                <span id="robuxValue" class="val-rbx">5000 R$</span>
+            </div>
+
+            <div class="slider-wrapper">
+                <input type="range" min="100" max="10000" value="5000" class="custom-slider" id="mainSlider">
+                <div class="slider-thumb-label" id="sliderThumb">5000</div>
+            </div>
+
+            <button class="btn-buy-huge" id="btnGoToPayment">Купить робуксы</button>
+
+            <div class="card-footer">
+                <span class="f-label">Доступно в хранилище:</span>
+                <span class="f-value" id="liveStockCounter1">1 076 953 R$</span>
+            </div>
+        </section>
+
+        <section class="premium-card hidden" id="viewAdminPanel">
+            <div class="admin-header">
+                <h3>🛠 Управление платформой (Admin)</h3>
+                <p>Настройки склада и прав доступа</p>
+            </div>
+
+            <div class="admin-stats">
+                <div class="stat-box">
+                    <span class="s-label">Юзеров</span>
+                    <span class="s-val" id="admTotalUsers">0</span>
+                </div>
+                <div class="stat-box">
+                    <span class="s-label">Админов</span>
+                    <span class="s-val orange" id="admTotalAdmins">0</span>
+                </div>
+            </div>
+
+            <div class="admin-block">
+                <h4>📦 Баланс склада (R$)</h4>
+                <div class="input-row">
+                    <input type="number" id="admStockInput" class="dark-input">
+                    <button class="btn-save" id="btnSaveStock">Обновить</button>
+                </div>
+            </div>
+
+            <div class="admin-block">
+                <h4>👑 Добавить Администратора</h4>
+                <div class="input-grid">
+                    <input type="text" id="admNewUser" class="dark-input" placeholder="Username">
+                    <input type="email" id="admNewEmail" class="dark-input" placeholder="Email">
+                    <input type="password" id="admNewPass" class="dark-input" placeholder="Пароль">
+                </div>
+                <button class="btn-save full-w" id="btnCreateAdmin">Выдать права</button>
+            </div>
+            
+            <div class="admin-block">
+                <h4>Пользователи в базе:</h4>
+                <div class="logs-box" id="admAccountsList"></div>
+            </div>
+        </section>
+
+        <section class="info-banner">
+            <div class="i-icon">⚡</div>
+            <div class="i-text">
+                <h4>Премиальное качество и максимальная защита</h4>
+                <p>Все транзакции шифруются. Самый выгодный курс за счет прямых поставок от крупных разработчиков игровых режимов.</p>
+            </div>
+        </section>
+
+        <section class="live-feed">
+            <div class="feed-title">МОНИТОРИНГ СДЕЛОК В РЕАЛЬНОМ ВРЕМЕНИ <span class="dot"></span></div>
+            <div class="feed-cards">
+                <div class="f-card"><span class="f-ava">👾</span><div class="f-info"><span>Mil...55</span><strong>100 R$</strong></div></div>
+                <div class="f-card"><span class="f-ava">🤖</span><div class="f-info"><span>Sou...1t</span><strong>380 R$</strong></div></div>
+                <div class="f-card"><span class="f-ava">🦊</span><div class="f-info"><span>nik...11</span><strong>50 R$</strong></div></div>
+                <div class="f-card"><span class="f-ava">🐱</span><div class="f-info"><span>Avt...oB</span><strong>215 R$</strong></div></div>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
